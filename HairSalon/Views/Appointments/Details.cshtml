@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>@Model.Time</h1>
+
+<p>Client: @Model.Client.Name</p>
+<p>Stylist: @Model.Stylist.Name</p>
+
+@Html.ActionLink("Edit This Appointment", "Edit", new { id = @Model.AppointmentId })
+<br>
+@Html.ActionLink("Delete This Appointment", "Delete", new { id = @Model.AppointmentId })

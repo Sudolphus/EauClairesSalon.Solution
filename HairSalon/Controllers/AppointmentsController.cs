@@ -17,7 +17,7 @@ namespace HairSalon.Controllers
 
     public ActionResult Index()
     {
-      IEnumerable<Appointment> model = _db.Appointments.Include(apps => apps.Stylist).Include(apps => apps.Client).ToList().OrderBy(apps => apps.Stylist.Name).ThenBy(apps => apps.Time);
+      IEnumerable<Appointment> model = _db.Appointments.Include(apps => apps.Client).Include(apps => apps.Stylist).ToList().OrderBy(apps => apps.Stylist.Name).ThenBy(apps => apps.Time);
       return View(model);
     }
 
