@@ -1,0 +1,28 @@
+.page-header {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding-bottom: 5px;
+}
+
+.sidenav {
+  height: 100vh;
+  background-color: black;
+  overflow-x: hidden;
+}
+
+.sidenav a {
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.sidenav a:hover  {
+  background-color: grey;
+  color: black;
+}
+
+.body-view {
+  padding: 20px;
+}
