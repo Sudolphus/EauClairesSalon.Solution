@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@using HairSalon.Models
+@model HairSalon.Models.Client
+
+@if (@ViewBag.StylistList.Count == 0)
+{
+  <p>Please add a Stylist before adding Clients.</p>
+}
+else
+{
+  @using (Html.BeginForm())
+  {
+    <div class="form-group">
+      @Html.LabelFor(model => model.Name)
+      @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @required=true })
+    </div>
+    <div class="form-group">
+      <label for="stylistName">Choose a Stylist:</label>
+      <select name="stylistName" id="stylistName" class="form-control">
+        @foreach(Stylist stylist in @ViewBag.StylistList)
+        {
+          <option value=stylist.StylistId>stylist.Name</option>
+        }
+      </select>
+    </div>
+  }
+}
