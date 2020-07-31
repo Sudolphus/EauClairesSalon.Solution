@@ -1,0 +1,10 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>@Model.Name</h1>
+
+<p>Current Stylist: @Model.Stylist.Name</p>
+
+@Html.ActionLink("Edit Client Info", "Edit", new { id = @Model.ClientId })
+@Html.ActionLink("Delete Client", "Delete", new { id = @Model.ClientId })
