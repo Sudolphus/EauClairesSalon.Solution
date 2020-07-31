@@ -1,0 +1,35 @@
+@{
+  Layout = "_Layout";
+}
+
+@using HairSalon.Models
+@model HairSalon.Models.Appointment
+
+@if (@ViewBag.StylistCount == 0)
+{
+  <p>Please add a stylist before adding apppointments</p>
+}
+else if (@ViewBag.ClientCount == 0)
+{
+  <p>Please add a client before adding appointments</p>
+}
+else
+{
+  @using (Html.BeginForm())
+  {
+    <div class="form-group">
+      <label for="time">Time of Appointment</label>
+      <input type="datetime-local" name="time" id="time" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="clientId">Client</label>
+      <select class="form-control">
+        @foreach(Client client in @ViewBag.ClientList)
+        {
+          <option value=@client.ClientId>@client.Name</option>
+        }
+      </select>
+    </div>
+    <input type="submit" value="Add Appointment" class="btn btn-success" />
+  }
+}
