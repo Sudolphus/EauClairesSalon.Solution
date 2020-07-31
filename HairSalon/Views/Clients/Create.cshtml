@@ -18,8 +18,8 @@ else
       @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @required=true })
     </div>
     <div class="form-group">
-      <label for="stylistName">Choose a Stylist:</label>
-      <select name="stylistName" id="stylistName" class="form-control">
+      <label for="stylistId">Choose a Stylist:</label>
+      <select name="stylistId" id="stylistId" class="form-control">
         @foreach(Stylist stylist in @ViewBag.StylistList)
         {
           <option value=stylist.StylistId>stylist.Name</option>
