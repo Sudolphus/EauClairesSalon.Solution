@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using HairSalon.Models;
 
 namespace HairSalon.Controllers
@@ -16,9 +16,15 @@ namespace HairSalon.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string client)
     {
-      List<Client> model = _db.Clients.Include(clients => clients.Stylist).ToList();
+      IQueryable<Client> clientQuery = _db.Clients.Include(clients => clients.Stylist);
+      if (!string.IsNullOrEmpty(client))
+      {
+        Regex search = new Regex(client, RegexOptions.IgnoreCase);
+        clientQuery = clientQuery.Where(clients => search.IsMatch(clients.Name));
+      }
+      IEnumerable<Client> model = clientQuery.ToList().OrderBy(clients => clients.Stylist.Name).ThenBy(clients => clients.Name);
       return View(model);
     }
 

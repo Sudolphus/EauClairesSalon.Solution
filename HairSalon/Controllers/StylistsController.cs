@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using HairSalon.Models;
 
 namespace HairSalon.Controllers
@@ -15,9 +16,15 @@ namespace HairSalon.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string stylist)
     {
-      List<Stylist> model = _db.Stylists.ToList();
+      IQueryable<Stylist> stylistQuery = _db.Stylists;
+      if (!string.IsNullOrEmpty(stylist))
+      {
+        Regex search = new Regex(stylist, RegexOptions.IgnoreCase);
+        stylistQuery = stylistQuery.Where(stylists => search.IsMatch(stylists.Name));
+      }
+      IEnumerable<Stylist> model = stylistQuery.ToList().OrderBy(stylists => stylists.Name);
       return View(model);
     }
 

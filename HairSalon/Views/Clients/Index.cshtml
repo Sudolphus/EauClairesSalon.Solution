@@ -3,14 +3,19 @@
 }
 
 @using HairSalon.Models
-@model List<HairSalon.Models.Client>
+@model IEnumerable<HairSalon.Models.Client>
 
-@if (@Model.Count == 0)
+@if (!Model.Any())
 {
   <p>No Clients Added</p>
 }
 else
 {
+  <form asp-controller="Clients" asp-action="Index">
+    <label for="client">Filter By Name</label>
+    <input name="client" id="client" type="text" />
+    <input type="submit" value="Filter" class="btn btn-info" />
+  </form>
   <ul>
     @foreach(Client client in Model)
     {
