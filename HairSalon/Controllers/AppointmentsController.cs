@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HairSalon.Models;
@@ -39,10 +40,12 @@ namespace HairSalon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Appointment appointment, string clientId)
+    public ActionResult Create(string time, string clientId)
     {
-      Client client = _db.Clients.FirstOrDefault(clients => clients.ClientId == int.Parse(clientId));
+      Client client = _db.Clients.Include(clients => clients.Stylist).FirstOrDefault(clients => clients.ClientId == int.Parse(clientId));
       Stylist stylist = client.Stylist;
+      Appointment appointment = new Appointment(Convert.ToDateTime(time));
+      // appointment.Time = Convert.ToDateTime(time);
       client.Appointments.Add(appointment);
       stylist.Appointments.Add(appointment);
       _db.SaveChanges();
