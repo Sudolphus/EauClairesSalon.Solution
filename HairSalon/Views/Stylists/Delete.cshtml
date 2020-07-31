@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HairSalon.Models.Stylist
+
+<h1>Delete @Html.DisplayFor(model => model.Name)?</h1>
+
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Confirm Delete" class="btn btn-danger" />
+}
