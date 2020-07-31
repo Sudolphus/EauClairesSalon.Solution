@@ -5,8 +5,8 @@ namespace ProjectName.Controllers
 {
   public class HomeController : Controller
   {
-    [Route("/")]
-    public ActionResult Homepage() {
+    [HttpGet("/")]
+    public ActionResult Index() {
       return View();
     }
   }
