@@ -1,18 +1,22 @@
-# _{Application Name}_
+# _Eau Claire's Salon_
 
-#### _{Brief description of application}, {Date of current version}_
+#### _An app to keep track of a salon, 7.31.20_
 
 #### By _**Micheal Hansen**_
 
 ## Description
 
-_{This is a detailed description of your application. Its purpose and usage.  Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. }_
+_This app is designed to keep track of the employees of a salon, along with their regular customers, using a MySQL database on the backend integrated into a .NET MVC via Entity Framework Core._
 
 ## Specifications
 
 | Spec | Input | Output |
 | :--- | :---: | ---: |
-
+| User can access the home page| Localhost:5000 | Homepage splash screen|
+| User can view a list of stylists| Click "View Stylists" | List of stylists |
+| User can view a stylist's details, including a list of their clients | Clicks a stylist's name | Stylist's details |
+| User can add new stylists to the database | Clicks Add New | New stylist added to database |
+| User can add clients to a stylist | Clicks Add Client | Client added to stylist |
 
 ## Setup/Installation Requirements
 
@@ -34,7 +38,7 @@ Running the program:
 
 ## Known Bugs
 
-_{Are there issues that have not yet been resolved that you want to let users know you know?  Outline any issues that would impact use of your application.  Share any workarounds that are in place. }_
+_None currently known_
 
 ## Support and contact details
 
@@ -43,26 +47,6 @@ _Please reach out through my GitHub account._
 ## Technologies Used
 
 * _VSCode_
-* _C# and .NET_
-
-### License
-
-Copyright (c) 2020 **_Micheal Hansen_**
-
-*Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:*
-
-*The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.*
-
-*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.*
+* _C# and .NET Core_
+* _MySQL Server and MySQL Workbench_
+* _Entity Core_

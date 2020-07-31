@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectName.Models;
 
-namespace EauClairesSalon
+namespace HairSalon
 {
   public class Startup
   {
