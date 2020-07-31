@@ -22,23 +22,66 @@ _This app is designed to keep track of the employees of a salon, along with thei
 
 Software Requirements
 1. .NET framework
-2. A code editor (Visual Studio Code, Atom, etc.)
+2. MySQL Server
+3. A code editor (Visual Studio Code, Atom, etc.)
+4. A SQL database manager (MySql Workbench, etc. Techically optional)
 
 Acquire The Repo:
-1. Click the 'Clone or Download Button
-2. Alternately, Clone via Bash/GitBash: `git clone {repo}`
+1. Click the 'Clone or Download Button'
+2. Alternately, Clone via Bash/GitBash: `git clone https://github.com/Sudolphus/EauClairesSalon.Solution.git`
 
 Editting the Code Base:
 1. Open the project in your code editor; with Bash, this is done by navigating to the project directory, then `code .`
-2. If you wish to run testing, you'll need the testing packages: navigate into the .Tests folder, and run `dotnet restore`
 
 Running the program:
-1. To run the program, you'll need to compile the code: `dotnet build`. This will create a compiled application in the bin/ folder.
-2. Alternately, you can run the program directly with `dotnet run`.
+1. First, you'll need to acquire the necessary package by running `dotnet restore` in the HairdSaon directory.
+2. To run the program, you'll need to compile the code: `dotnet build`. This will create a compiled application in the bin/ folder.
+3. Alternately, you can run the program directly with `dotnet run`.
 
+SQL Database:
+1. First, create the database. If you have a SQL Database Manager, you can directly import the schema from the Micheal_Hansen.sql file included in the top level of the project.
+2. Alternately, you can create the database manually. In a terminal with MySQL running, enter:
+```
+DROP DATABASE IF EXISTS `Micheal_Hansen`;
+CREATE DATABASE `Micheal_Hansen`;
+
+USE DATABASE `Micheal_Hansen`;
+
+DROP TABLE IF EXISTS `appointments`;
+CREATE TABLE `appointments` (
+  `AppointmentId` int NOT NULL AUTO_INCREMENT,
+  `Time` datetime NOT NULL,
+  `StylistId` int DEFAULT '0',
+  `ClientId` int DEFAULT '0',
+  PRIMARY KEY (`AppointmentId`),
+  KEY `StylistId_idx` (`StylistId`),
+  KEY `ClientId_idx` (`ClientId`),
+  CONSTRAINT `ApptClient` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`ClientID`),
+  CONSTRAINT `ApptStylist` FOREIGN KEY (`StylistId`) REFERENCES `stylists` (`StylistId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `clients`;
+CREATE TABLE `clients` (
+  `ClientID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) NOT NULL,
+  `StylistID` int DEFAULT '0',
+  PRIMARY KEY (`ClientID`),
+  KEY `StylistID_idx` (`StylistID`),
+  CONSTRAINT `StylistID` FOREIGN KEY (`StylistID`) REFERENCES `stylists` (`StylistId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `stylists`;
+CREATE TABLE `stylists` (
+  `StylistId` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) NOT NULL,
+  PRIMARY KEY (`StylistId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+```
+3. You'll also need to configure the appsettings.json file, by changing {Password} to your MySql Server password. If your computer uses a different port, if you're not the root user, or you've decided to import the database with a different name, you'll need to update those fields as well.
+   
 ## Known Bugs
 
-_None currently known_
+_Interface to add appointments is currently bugged, and is commented out until a fix is made._
 
 ## Support and contact details
 
