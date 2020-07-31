@@ -46,21 +46,15 @@ namespace HairSalon.Controllers
     public ActionResult Edit(int id)
     {
       Client client = _db.Clients.Include(clients => clients.Stylist).FirstOrDefault(clients => clients.ClientId == id);
-      ViewBag.StylistList = _db.Stylists.ToList();
       return View(client);
     }
 
     [HttpPost]
-    public ActionResult Edit(Client client, string stylistId)
+    public ActionResult Edit(Client client)
     {
-      if (int.Parse(stylistId) != client.StylistId)
-      {
-        Stylist stylist = _db.Stylists.FirstOrDefault(stylists => stylists.StylistId == int.Parse(stylistId));
-        stylist.Clients.Add(client);
-      }
       _db.Entry(client).State = EntityState.Modified;
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = client.ClientId});
+      return RedirectToAction("Details", new { id = client.ClientId });
     }
 
     public ActionResult Delete(int id)

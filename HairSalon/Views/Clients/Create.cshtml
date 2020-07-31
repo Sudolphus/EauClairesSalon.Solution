@@ -22,9 +22,10 @@ else
       <select name="stylistId" id="stylistId" class="form-control">
         @foreach(Stylist stylist in @ViewBag.StylistList)
         {
-          <option value=stylist.StylistId>stylist.Name</option>
+          <option value=@stylist.StylistId>@stylist.Name</option>
         }
       </select>
+      <input type="submit" value="Add Client" class="btn btn-success" />
     </div>
   }
 }

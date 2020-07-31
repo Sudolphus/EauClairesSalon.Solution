@@ -14,11 +14,5 @@
     @Html.LabelFor(model => model.Name)
     @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @required=true })
   </div>
-  <select name="stylistId" id="stylistId" class="form-control">
-    @foreach(Stylist stylist in @ViewBag.StylistList)
-    {
-      <option value=stylist.StylistId>stylist.Name</option>
-    }
-  </select>
   <input type="submit" value="Edit Client" class="btn btn-info" />
 }
