@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Project Name</title>
+    <title>Eau Claire's Salon</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="~/css/styles.css" />
   </head>
   <body>
-    <div class="container">
-      @RenderBody()
+    <div class="container-fluid">
+      <div class="page-header">
+        <h1>Eau Claire's Salon</h1>
+        <p>Where Style Dreams Come True</p>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          @Html.Partial("Sidenav")
+        </div>
+        <div class="col-md-9">
+          @RenderBody()
+        </div>
+      </div>
     </div>
   </body>
 </html>
