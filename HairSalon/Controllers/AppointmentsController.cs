@@ -30,7 +30,7 @@ namespace HairSalon.Controllers
     public ActionResult Create()
     {
       IEnumerable<Client> clientList = _db.Clients.ToList().OrderBy(clients => clients.Name);
-      IEnumerable<Client> stylistList = _db.Stylists.ToList().OrderBy(stylists => stylist.Name);
+      IEnumerable<Stylist> stylistList = _db.Stylists.ToList().OrderBy(stylists => stylists.Name);
       ViewBag.ClientList = clientList;
       ViewBag.StylistList = stylistList;
       ViewBag.ClientCount = clientList.Count();
