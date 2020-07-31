@@ -30,8 +30,11 @@ namespace HairSalon.Controllers
     public ActionResult Create()
     {
       IEnumerable<Client> clientList = _db.Clients.ToList().OrderBy(clients => clients.Name);
+      IEnumerable<Client> stylistList = _db.Stylists.ToList().OrderBy(stylists => stylist.Name);
       ViewBag.ClientList = clientList;
+      ViewBag.StylistList = stylistList;
       ViewBag.ClientCount = clientList.Count();
+      ViewBag.StylistCount = stylistList.Count();
       return View();
     }
 
@@ -43,7 +46,21 @@ namespace HairSalon.Controllers
       client.Appointments.Add(appointment);
       stylist.Appointments.Add(appointment);
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = appointment.id });
+      return RedirectToAction("Details", new { id = appointment.AppointmentId });
+    }
+
+    public ActionResult Edit(int id)
+    {
+      Appointment appointment = _db.Appointments.Include(apps => apps.Stylist).Include(apps => apps.Client).FirstOrDefault(apps => apps.AppointmentId == id);
+      return View(appointment);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Appointment appointment)
+    {
+      _db.Entry(appointment).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = appointment.AppointmentId });
     }
   }
 }
