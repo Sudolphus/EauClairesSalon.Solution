@@ -1,7 +1,8 @@
 .vscode/
 */bin/
 */obj/
-node_modules/
-dist/
+*/node_modules/
+*/dist/
 .DS_Store
 .env
+*/appsettings.json
