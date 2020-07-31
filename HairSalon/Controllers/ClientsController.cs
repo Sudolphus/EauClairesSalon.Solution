@@ -30,7 +30,9 @@ namespace HairSalon.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.StylistList = _db.Stylists.ToList();
+      IEnumerable<Stylist> stylistList = _db.Stylists.ToList().OrderBy(stylists => stylists.Name);
+      ViewBag.StylistList = stylistList;
+      ViewBag.StylistCount = stylistList.Count();
       return View();
     }
 

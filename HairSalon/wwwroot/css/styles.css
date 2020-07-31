@@ -3,6 +3,7 @@
   background-color: black;
   color: white;
   padding-bottom: 5px;
+  font-family: Verdana;
 }
 
 .sidenav {
@@ -25,4 +26,8 @@
 
 .body-view {
   padding: 20px;
+}
+
+form {
+  margin-bottom: 10px;
 }
