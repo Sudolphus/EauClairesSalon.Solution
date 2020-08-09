@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS `Micheal_Hansen`;
 CREATE DATABASE `Micheal_Hansen`;
 
-USE DATABASE `Micheal_Hansen`;
+USE `Micheal_Hansen`;
 
 DROP TABLE IF EXISTS `appointments`;
 CREATE TABLE `appointments` (
