@@ -24,7 +24,9 @@ namespace HairSalon.Controllers
         Regex search = new Regex(stylist, RegexOptions.IgnoreCase);
         stylistQuery = stylistQuery.Where(stylists => search.IsMatch(stylists.Name));
       }
-      IEnumerable<Stylist> model = stylistQuery.ToList().OrderBy(stylists => stylists.Name);
+      IEnumerable<Stylist> model = stylistQuery
+        .ToList()
+        .OrderBy(stylists => stylists.Name);
       return View(model);
     }
 
@@ -43,7 +45,9 @@ namespace HairSalon.Controllers
 
     public ActionResult Details(int id)
     {
-      Stylist stylist = _db.Stylists.Include(stylists => stylists.Clients).FirstOrDefault(stylists => stylists.StylistId == id);
+      Stylist stylist = _db.Stylists
+        .Include(stylists => stylists.Clients)
+        .FirstOrDefault(stylists => stylists.StylistId == id);
       return View(stylist);
     }
 

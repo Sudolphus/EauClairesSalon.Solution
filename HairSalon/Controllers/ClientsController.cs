@@ -24,7 +24,10 @@ namespace HairSalon.Controllers
         Regex search = new Regex(client, RegexOptions.IgnoreCase);
         clientQuery = clientQuery.Where(clients => search.IsMatch(clients.Name));
       }
-      IEnumerable<Client> model = clientQuery.ToList().OrderBy(clients => clients.Stylist.Name).ThenBy(clients => clients.Name);
+      IEnumerable<Client> model = clientQuery
+        .ToList()
+        .OrderBy(clients => clients.Stylist.Name)
+        .ThenBy(clients => clients.Name);
       return View(model);
     }
 
