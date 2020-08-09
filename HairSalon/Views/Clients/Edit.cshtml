@@ -10,9 +10,14 @@
 
 @using (Html.BeginForm())
 {
-  <div class="form-group">
+  @Html.HiddenFor(model => model.ClientId)
+  <div class="form-group">    
     @Html.LabelFor(model => model.Name)
     @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @required=true })
+  </div>
+  <div class="form-group">
+    @Html.Label("Stylist:")
+    @Html.DropDownList("StylistId")
   </div>
   <input type="submit" value="Edit Client" class="btn btn-info" />
 }

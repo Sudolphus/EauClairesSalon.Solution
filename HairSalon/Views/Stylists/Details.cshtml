@@ -19,8 +19,7 @@ else
       <li>@Html.ActionLink($"{client.Name}", "Details", "Clients", new { id = client.ClientId })</li>
     }
   </ul>
-  <hr />
-  @Html.ActionLink("Edit Information", "Edit", new { id = @Model.StylistId })
-  <br>
-  @Html.ActionLink("Delete Information", "Delete", new { id = @Model.StylistId })
 }
+
+<p>@Html.ActionLink("Edit Information", "Edit", new { id = @Model.StylistId })</p>
+<p>@Html.ActionLink("Delete Information", "Delete", new { id = @Model.StylistId })</p>

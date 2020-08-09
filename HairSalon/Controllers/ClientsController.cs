@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,13 +57,20 @@ namespace HairSalon.Controllers
 
     public ActionResult Edit(int id)
     {
-      Client client = _db.Clients.Include(clients => clients.Stylist).FirstOrDefault(clients => clients.ClientId == id);
+      Client client = _db.Clients
+        .Include(clients => clients.Stylist)
+        .FirstOrDefault(clients => clients.ClientId == id);
+      IEnumerable<Stylist> stylistList = _db.Stylists
+        .ToList()
+        .OrderBy(sty => sty.Name);
+      ViewBag.StylistId = new SelectList(stylistList, "StylistId", "Name");
       return View(client);
     }
 
     [HttpPost]
-    public ActionResult Edit(Client client)
+    public ActionResult Edit(Client client, int StylistId)
     {
+      client.StylistId = StylistId;
       _db.Entry(client).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = client.ClientId });
