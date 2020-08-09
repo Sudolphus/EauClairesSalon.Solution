@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@using HairSalon.Models
+@model IEnumerable<HairSalon.Models.Appointment>
+
+<h2>Appointments</h2>
+
+@if(!Model.Any())
+{
+  <p>There are no appointments in the database</p>
+}
+else
+{
+  <form asp-controller="Appointment" asp-action="Index">
+    <label for="stylist">Filter By Stylist:</label>
+    <input name="stylist" id="stylist" type="text" />
+    <label for="client">Filter By Client:</label>
+    <input name="client" id="client" type="text" />
+    <input type="submit" value="Filter" class="btn btn-success" />
+  </form>
+
+  <ul>
+    @foreach(Appointment appointment in Model)
+    {
+      <li>@Html.ActionLink($"{appointment.DayTime}", "Details", new { id = appointment.AppointmentId }) | Stylist: @appointment.Stylist.Name | Client: @appointment.Client.Name</li>
+    }
+  </ul>
+}
