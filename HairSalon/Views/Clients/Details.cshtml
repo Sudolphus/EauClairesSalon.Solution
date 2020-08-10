@@ -2,9 +2,24 @@
   Layout = "_Layout";
 }
 
+@using HairSalon.Models
+
 <h1>@Model.Name</h1>
 
 <p>Current Stylist: @Model.Stylist.Name</p>
+
+<p>Appointments: </p>
+@if (@Model.Appointments.Count == 0)
+{
+  <p>This client has no appointments</p>
+}
+else
+{
+  @foreach(Appointment appointment in ViewBag.AppointmentList)
+  {
+    <li>@Html.ActionLink($"{appointment.DayTime}", "Details", "Appointments", new { id = appointment.AppointmentId })</li>
+  }
+}
 
 @Html.ActionLink("Edit Client Info", "Edit", new { id = @Model.ClientId })
 <br>

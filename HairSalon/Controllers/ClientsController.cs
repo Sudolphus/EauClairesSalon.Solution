@@ -51,7 +51,14 @@ namespace HairSalon.Controllers
 
     public ActionResult Details(int id)
     {
-      Client client = _db.Clients.Include(clients => clients.Stylist).FirstOrDefault(clients => clients.ClientId == id);
+      Client client = _db.Clients
+        .Include(clients => clients.Stylist)
+        .Include(clients => clients.Appointments)
+        .FirstOrDefault(clients => clients.ClientId == id);
+      IEnumerable<Appointment> appointments = client.Appointments
+        .ToList()
+        .OrderBy(app => app.DayTime);
+      ViewBag.AppointmentList = appointments;
       return View(client);
     }
 
