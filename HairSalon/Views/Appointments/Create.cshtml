@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@using HairSalon.Models
+@model HairSalon.Models.Appointment
+
+
+@if (ViewBag.StylistCount == 0 || ViewBag.ClientCount == 0)
+{
+  <p>Please add at least one Stylist and one Client before adding appointments</p>
+}
+else
+{
+  @using (Html.BeginForm())
+  {
+    <div class="form-group">
+      @Html.LabelFor(model => model.DayTime)
+      @Html.TextBoxFor(model => model.DayTime, new { @class="form-control", @type="datetime-local"})
+    </div>
+    @Html.Label("Stylist:")
+    @Html.DropDownList("StylistId")
+    @Html.Label("Client:")
+    @Html.DropDownList("ClientId")
+    <input type="submit" value="Add Appointment" class="btn btn-success" />
+  }
+}

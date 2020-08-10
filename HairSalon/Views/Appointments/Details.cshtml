@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+}
+
+@using HairSalon.Models
+@model HairSalon.Models.Appointment
+
+<h2>Appointment Details</h2>
+
+@Html.DisplayFor(model => model.DayTime)
+<p>@Html.ActionLink($"Stylist: {Model.Stylist.Name}", "Details", "Stylists", new { id = Model.Stylist.StylistId })</p>
+<p>@Html.ActionLink($"Client: {Model.Client.Name}", "Details", "Clients", new { id = Model.Client.ClientId })</p>

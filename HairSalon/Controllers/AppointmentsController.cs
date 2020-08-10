@@ -46,8 +46,10 @@ namespace HairSalon.Controllers
       IEnumerable<Client> clientList = _db.Clients
         .ToList()
         .OrderBy(cli => cli.Name);
-      ViewBag.StylistId = new SelectList(stylistList);
-      ViewBag.ClientId = new SelectList(clientList);
+      ViewBag.StylistCount = stylistList.Count();
+      ViewBag.ClientCount = clientList.Count();
+      ViewBag.StylistId = new SelectList(stylistList, "StylistId", "Name");
+      ViewBag.ClientId = new SelectList(clientList, "ClientId", "Name");
       return View();
     }
 
@@ -60,6 +62,15 @@ namespace HairSalon.Controllers
       client.Appointments.Add(appointment);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult Details(int id)
+    {
+      Appointment appointment = _db.Appointments
+        .Include(app => app.Stylist)
+        .Include(app => app.Client)
+        .First(app => app.AppointmentId == id);
+      return View(appointment);
     }
   }
 }
