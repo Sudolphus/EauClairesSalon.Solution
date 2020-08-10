@@ -42,42 +42,42 @@ SQL Database:
 1. First, create the database. If you have a SQL Database Manager, you can directly import the schema from the Micheal_Hansen.sql file included in the top level of the project.
 2. Alternately, you can create the database manually. In a terminal with MySQL running, enter:
 ```
-DROP DATABASE IF EXISTS `Micheal_Hansen`;
-CREATE DATABASE `Micheal_Hansen`;
-
-USE DATABASE `Micheal_Hansen`;
-
-DROP TABLE IF EXISTS `appointments`;
-CREATE TABLE `appointments` (
-  `AppointmentId` int NOT NULL AUTO_INCREMENT,
-  `Time` datetime NOT NULL,
-  `StylistId` int DEFAULT '0',
-  `ClientId` int DEFAULT '0',
-  PRIMARY KEY (`AppointmentId`),
-  KEY `StylistId_idx` (`StylistId`),
-  KEY `ClientId_idx` (`ClientId`),
-  CONSTRAINT `ApptClient` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`ClientID`),
-  CONSTRAINT `ApptStylist` FOREIGN KEY (`StylistId`) REFERENCES `stylists` (`StylistId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-DROP TABLE IF EXISTS `clients`;
-CREATE TABLE `clients` (
-  `ClientID` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) NOT NULL,
-  `StylistID` int DEFAULT '0',
-  PRIMARY KEY (`ClientID`),
-  KEY `StylistID_idx` (`StylistID`),
-  CONSTRAINT `StylistID` FOREIGN KEY (`StylistID`) REFERENCES `stylists` (`StylistId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP DATABASE IF EXISTS `micheal_hansen`;
+CREATE DATABASE IF NOT EXISTS `micheal_hansen`;
+USE `micheal_hansen`;
 
 DROP TABLE IF EXISTS `stylists`;
 CREATE TABLE `stylists` (
   `StylistId` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) NOT NULL,
+  `Name` longtext,
   PRIMARY KEY (`StylistId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `clients`;
+CREATE TABLE `clients` (
+  `ClientId` int NOT NULL AUTO_INCREMENT,
+  `Name` longtext,
+  `StylistId` int NOT NULL,
+  PRIMARY KEY (`ClientId`),
+  KEY `IX_Clients_StylistId` (`StylistId`),
+  CONSTRAINT `FK_Clients_Stylists_StylistId` FOREIGN KEY (`StylistId`) REFERENCES `stylists` (`StylistId`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `appointments`;
+CREATE TABLE `appointments` (
+  `AppointmentId` int NOT NULL AUTO_INCREMENT,
+  `DayTime` datetime(6) NOT NULL,
+  `StylistId` int NOT NULL,
+  `ClientId` int NOT NULL,
+  PRIMARY KEY (`AppointmentId`),
+  KEY `IX_Appointments_ClientId` (`ClientId`),
+  KEY `IX_Appointments_StylistId` (`StylistId`),
+  CONSTRAINT `FK_Appointments_Clients_ClientId` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`ClientId`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Appointments_Stylists_StylistId` FOREIGN KEY (`StylistId`) REFERENCES `stylists` (`StylistId`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ```
-3. You'll also need to configure the appsettings.json file, by changing {Password} to your MySql Server password. If your computer uses a different port, if you're not the root user, or you've decided to import the database with a different name, you'll need to update those fields as well.
+3. Alternately, alternately, the migrations folder can allow you to import the database directly. To do so, in the HairSalon directory, run `dotnet ef database update`.
+4. You'll also need to configure the appsettings.json file, by changing {Your_Password} to your MySql Server password. If your computer uses a different port, if you're not the root user, or you've decided to import the database with a different name, you'll need to update those fields as well.
    
 ## Known Bugs
 
