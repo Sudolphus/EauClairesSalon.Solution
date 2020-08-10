@@ -37,5 +37,29 @@ namespace HairSalon.Controllers
         .ThenBy(app => app.Stylist.Name);
       return View(appointmentList);
     }
+
+    public ActionResult Create()
+    {
+      IEnumerable<Stylist> stylistList = _db.Stylists
+        .ToList()
+        .OrderBy(sty => sty.Name);
+      IEnumerable<Client> clientList = _db.Clients
+        .ToList()
+        .OrderBy(cli => cli.Name);
+      ViewBag.StylistId = new SelectList(stylistList);
+      ViewBag.ClientId = new SelectList(clientList);
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Appointment appointment, string StylistId, string ClientId)
+    {
+      Stylist stylist = _db.Stylists.FirstOrDefault(stylists => stylists.StylistId == int.Parse(StylistId));
+      Client client = _db.Clients.FirstOrDefault(clients => clients.ClientId == int.Parse(ClientId));
+      stylist.Appointments.Add(appointment);
+      client.Appointments.Add(appointment);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
