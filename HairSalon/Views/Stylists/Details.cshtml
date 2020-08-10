@@ -14,9 +14,24 @@
 else
 {
   <ul>
-    @foreach(Client client in @Model.Clients)
+    @foreach(Client client in ViewBag.ClientList)
     {
       <li>@Html.ActionLink($"{client.Name}", "Details", "Clients", new { id = client.ClientId })</li>
+    }
+  </ul>
+}
+
+<h3>Appointments</h3>
+@if (@Model.Appointments.Count == 0)
+{
+  <p>This stylist currently has no appointments.</p>
+}
+else
+{
+  <ul>
+    @foreach(Appointment appointment in ViewBag.AppointmentList)
+    {
+      <li>@Html.ActionLink($"{appointment.DayTime}", "Details", "Appointments", new { id = appointment.AppointmentId })</li>
     }
   </ul>
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,16 @@ namespace HairSalon.Controllers
     {
       Stylist stylist = _db.Stylists
         .Include(stylists => stylists.Clients)
+        .Include(stylists => stylists.Appointments)
         .FirstOrDefault(stylists => stylists.StylistId == id);
+      IEnumerable<Client> clientList = stylist.Clients
+        .ToList()
+        .OrderBy(client => client.Name);
+      IEnumerable<Appointment> appointmentList = stylist.Appointments
+        .ToList()
+        .OrderBy(appoinment => appoinment.DayTime);
+      ViewBag.ClientList = clientList;
+      ViewBag.AppointmentList = appointmentList;
       return View(stylist);
     }
 
