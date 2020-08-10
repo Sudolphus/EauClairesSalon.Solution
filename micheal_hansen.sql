@@ -1,12 +1,6 @@
 DROP DATABASE IF EXISTS `micheal_hansen`;
 CREATE DATABASE IF NOT EXISTS `micheal_hansen`;
 USE `micheal_hansen`;
-DROP TABLE IF EXISTS `__efmigrationshistory`;
-CREATE TABLE `__efmigrationshistory` (
-  `MigrationId` varchar(95) NOT NULL,
-  `ProductVersion` varchar(32) NOT NULL,
-  PRIMARY KEY (`MigrationId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `stylists`;
 CREATE TABLE `stylists` (

@@ -81,7 +81,7 @@ CREATE TABLE `appointments` (
    
 ## Known Bugs
 
-_Interface to add appointments is currently bugged, and is commented out until a fix is made._
+_Full CRUD functionality for appointments doesn't exist, and there's no protection against double-scheduling._
 
 ## Support and contact details
 
